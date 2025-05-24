@@ -1,24 +1,40 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+document.addEventListener("DOMContentLoaded", () => {
+  const radios = document.querySelectorAll("input[name=radio]");
+  const renderer = document.getElementById("renderer");
+  const textarea = document.querySelector(".textarea");
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+  radios.forEach((radio) => {
+    radio.addEventListener("change", (e) => {
+      if (e.target.checked) {
+        renderer.innerHTML = "";
+        const textAreaVal = textarea.value;
+        const mathSelected = e.target.value;
 
-setupCounter(document.querySelector('#counter'))
+        if (mathSelected === "l") {
+          renderer.innerHTML = "$$" + textAreaVal + "$$";
+        } else if (mathSelected === "m") {
+          renderer.innerHTML = textAreaVal;
+        } else {
+          renderer.innerHTML = "`" + textAreaVal + "`";
+        }
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub, renderer]);
+      }
+    });
+  });
+
+  textarea.addEventListener("keyup", (e) => {
+    renderer.innerHTML = "";
+    const mathSelected = document.querySelector(
+      "input[name=radio]:checked"
+    ).value;
+
+    if (mathSelected === "l") {
+      renderer.innerHTML = "$$" + e.target.value + "$$";
+    } else if (mathSelected === "m") {
+      renderer.innerHTML = e.target.value;
+    } else {
+      renderer.innerHTML = "`" + e.target.value + "`";
+    }
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, renderer]);
+  });
+});

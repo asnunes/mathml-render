@@ -1,13 +1,31 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
-</html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Math Renderer</title>
+  <link href='https://fonts.googleapis.com/css?family=Josefin+Slab' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+
+<body>
+  <link href='https://fonts.googleapis.com/css?family=Josefin+Slab' rel='stylesheet' type='text/css'>
+  <div class="buttons">
+    <input type="radio" value="l" name="radio" id="radioLatex" class="btinput" checked />
+    <label class="button btlat" for="radioLatex">LaTeX</label>
+    <input type="radio" value="m" name="radio" id="radioMml" class="btinput" />
+    <label class="button btmml" for="radioMml">MathML</label>
+    <input type="radio" value="a" name="radio" id="radioAscii" class="btinput" />
+    <label class="button btam" for="radioAscii">AsciiMath</label>
+  </div>
+
+  <textarea class="textarea" placeholder="Your formula here"></textarea>
+  <hr />
+  <p id="renderer" class="mathrender">
+  </p>
+
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+  <script type="module" src="/src/main.js"></script>
+
+</body>
